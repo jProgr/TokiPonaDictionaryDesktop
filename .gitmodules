@@ -1,0 +1,3 @@
+[submodule "TokiPonaDictionary"]
+	path = TokiPonaDictionary
+	url = https://github.com/jProgr/TokiPonaDictionary
