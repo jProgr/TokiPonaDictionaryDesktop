@@ -1,9 +1,15 @@
 const { app, BrowserWindow, screen } = require('electron');
+require('./app_menu.js');
+
+const isMac = process.platform === 'darwin';
 
 function createWindow() {
   let win = new BrowserWindow({
     width: 600,
     height: 800,
+    webPreferences: {
+      devTools: false,
+    }
   })
 
   win.loadFile('TokiPonaDictionary/index.html');
@@ -13,7 +19,7 @@ function createWindow() {
 app.on('window-all-closed', () => {
   // On macOS it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') app.quit();
+  if (!isMac) app.quit();
 });
 
 app.on('activate', () => {
