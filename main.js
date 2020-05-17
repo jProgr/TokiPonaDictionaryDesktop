@@ -1,4 +1,4 @@
-const { app, BrowserWindow, screen } = require('electron');
+const { app, BrowserWindow, screen, shell } = require('electron');
 require('./app_menu.js');
 
 const isMac = process.platform === 'darwin';
@@ -11,6 +11,13 @@ function createWindow() {
       devTools: false,
     }
   })
+
+  // Make links with target="_blank" open in
+  // default browser
+  win.webContents.on('new-window', (event, url) => {
+    event.preventDefault();
+    shell.openExternal(url);
+  });
 
   win.loadFile('TokiPonaDictionary/index.html');
 }
