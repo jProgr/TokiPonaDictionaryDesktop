@@ -2,11 +2,9 @@
 
 A simple Toki Pona - English dictionary with search function. Available as desktop app for macOS and [web](https://jprogr.github.io/TokiPonaDictionary/).
 
-## [Download it](https://github.com/jProgr/TokiPonaDictionaryDesktop/releases)
+## Downloads
 
-## Usage
-
-This a simple Toki Pona dictionary for macOS, just download it, open the .zip file a copy the app to your applications folder.
+This a simple Toki Pona dictionary for macOS, just download it, open the .zip file and copy the app to your applications folder. [Latest version available](https://github.com/jProgr/TokiPonaDictionaryDesktop/releases).
 
 ## Development
 
@@ -47,3 +45,24 @@ To package it a NPM script for [electron-packager](https://github.com/electron/e
 ```
 npm run package
 ```
+
+To work with the app icons you need to know that the icon for macOS is in reality a set of images of many sizes. Once you have done actual graphic work, you need to generate 10 PNG images with the following names and sizes:
+
+- icon_512x512@2x.png (1024, 1024)px
+- icon_512x512.png (512, 512)px
+- icon_256x256@2x.png (512, 512)px
+- icon_256x256.png (256, 256)px
+- icon_128x128@2x.png (256, 256)px
+- icon_128x128.png (128, 128)px
+- icon_32x32@2x.png (64, 64)px
+- icon_32x32.png (32, 32)px
+- icon_16x16@2x.png (32, 32)px
+- icon_16x16.png (16, 16)px
+
+Put them in a folder, rename the folder to `app_icon.iconset` and then use the following command to transform it to a `.icns` file:
+
+```
+iconutil -c icns app_icon.iconset
+```
+
+[More info on this](https://blog.macsales.com/28492-create-your-own-custom-icons-in-10-7-5-or-later/).
