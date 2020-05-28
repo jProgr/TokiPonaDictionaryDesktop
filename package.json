@@ -3,16 +3,18 @@
   "productName": "Toki Pona Dictionary",
   "version": "0.1.0-dev",
   "description": "A simple Toki Pona - English dictionary",
-  "main": "main.js",
+  "main": "built/main.js",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron .",
-    "package": "electron-packager ./ --overwrite --executable-name=\"Toki Pona Dictionary\" --out=dist --platform=darwin --icon=\"assets/app_icon.icns\""
+    "start": "tsc && electron built",
+    "package": "electron-packager build --overwrite --executable-name=\"Toki Pona Dictionary\" --out=dist --platform=darwin --icon=\"assets/app_icon.icns\""
   },
   "author": "jProgr <8537691@gmail.com> (https://github.com/jProgr)",
   "license": "Unlicense",
   "devDependencies": {
     "electron": "^8.2.3",
-    "electron-packager": "^14.2.1"
+    "electron-packager": "^14.2.1",
+    "typescript": "^3.9.3"
   }
 }
