@@ -1,7 +1,7 @@
-module.exports = function debounce(func, wait, immediate = false) {
+function debounce(func, wait, immediate = false) {
   var timeout;
 
-  return function() {
+  return function () {
     var context = this, args = arguments;
     var later = function() {
       timeout = null;
@@ -12,4 +12,6 @@ module.exports = function debounce(func, wait, immediate = false) {
     timeout = setTimeout(later, wait);
     if (callNow) func.apply(context, args);
   };
-};
+}
+
+module.exports = debounce;

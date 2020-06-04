@@ -1,19 +1,19 @@
 const { app, BrowserWindow, screen, shell } = require('electron');
-// const { UserSettings, Settings} = require('./user_settings/user_settings');
+const { UserSettings } = require('./user_settings/user_settings');
 const debounce = require('./utils/debounce');
 require('./app_menu.js');
-import * as path from 'path';
+const path = require('path');
 
 const isMac = process.platform === 'darwin';
 
 function createWindow() {
-  // let userSettings = UserSettings.getInstance();
-  // const width = userSettings.get(Settings.MAIN_WINDOW_WIDTH, 600);
-  // const height = userSettings.get(Settings.MAIN_WINDOW_HEIGHT, 800);
+  let userSettings = UserSettings.getInstance();
 
   let win = new BrowserWindow({
-    width: 600,
-    height: 800,
+    width: userSettings.get('mainWindowWidth'),
+    height: userSettings.get('mainWindowHeight'),
+    x: userSettings.get('mainWindowX'),
+    y: userSettings.get('mainWindowY'),
     webPreferences: {
       devTools: false,
     },
@@ -26,10 +26,15 @@ function createWindow() {
     shell.openExternal(url);
   });
 
-  // win.on('resize', () => debounce(() => {
-  //   console.log('size: ');
-  //   console.log(win.getSize());
-  // }), 1000);
+  // Save position and size of window
+  const saveWindowSizeAndPositionSettings = debounce(function () {
+    userSettings.set('mainWindowHeight', win.getSize()[0]);
+    userSettings.set('mainWindowHeight', win.getSize()[1]);
+    userSettings.set('mainWindowX', win.getPosition()[0]);
+    userSettings.set('mainWindowY', win.getPosition()[1]);
+  }, 3000);
+  win.on('resize', saveWindowSizeAndPositionSettings);
+  win.on('moved', saveWindowSizeAndPositionSettings);
 
   win.loadFile(path.join(__dirname, '../src/TokiPonaDictionary/index.html'));
 }
