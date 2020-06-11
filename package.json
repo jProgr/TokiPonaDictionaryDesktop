@@ -15,14 +15,11 @@
   "license": "Unlicense",
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "overwrite": true,
+        "icon": "assets/app_icon.icns"
+      },
       "makers": [
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": "tokiponadictionarydesktop"
-          }
-        },
         {
           "name": "@electron-forge/maker-zip",
           "platforms": [
@@ -30,11 +27,7 @@
           ]
         },
         {
-          "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
+          "name": "@electron-forge/maker-dmg",
           "config": {}
         }
       ]
